@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            height: 100%;
+            color: white;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,50,0.5), rgba(0,50,100,0.5)),
+                        url("{{ url_for('static', filename='background.jpg') }}") center/cover no-repeat;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #007cf0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: 500;
+            color: #007cf0;
+        }
+
+        input, select {
+            padding: 10px 12px;
+            border: 2px solid #007cf0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: box-shadow 0.3s, border 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #00dfd8;
+            box-shadow: 0 0 8px rgba(0, 223, 216, 0.5);
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007cf0, #00dfd8);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>💰 Income Prediction</h2>
+        <form method="post" action="/predict">
+            <label>Age:</label>
+            <input type="number" name="age" required min="18" max="100" placeholder="Min - 18, Max-100">
+
+            <label>Gender:</label>
+            <select name="sex" required>
+                <option value="">Select your gender</option>
+                {% for s in sexes %}
+                    <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Native Country:</label>
+            <select name="country" required>
+                <option value="">Select your country</option>
+                {% for c in countries %}
+                    <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Marital Status:</label>
+            <select name="marital_status" required>
+                <option value="">Select marital status</option>
+                {% for m in marital_statuses %}
+                    <option value="{{ m }}">{{ m }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Education Number:</label>
+            <input type="number" name="education_num" required min="9" max="16" placeholder="(9 HS Grad, 13-Bachelors, 14-Masters, 16-Doctorate)">
+
+            <button type="submit">🚀 Predict My Income</button>
+        </form>
+    </div>
+</body>
+</html>

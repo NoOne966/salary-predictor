@@ -11,7 +11,7 @@ label_encoders = joblib.load('model/label_encoders.pkl')
 
 # For dropdown generation:
 countries = ['United-States', 'India', 'Mexico', 'Philippines', 'Germany', 'Canada', 'England', 'Other']
-marital_statuses = ['Never-married', 'Married-civ-spouse', 'Divorced', 'Separated', 'Widowed', 'Married-spouse-absent']
+marital_statuses = ['Single', 'Married', 'Divorced']
 sexes = ['Male', 'Female']
 
 @app.route('/')
